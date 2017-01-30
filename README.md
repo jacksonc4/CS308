@@ -1,8 +1,7 @@
 # CS308 VCU Capstone Project
 
 ## Active/Active Cloud Infrastructure 
-
-### All of the necessary files can be downloaded from :https://github.com/jacksonc4/CS308.git
+All of the necessary files can be downloaded from :https://github.com/jacksonc4/CS308.git
 
 Group members
 ---
