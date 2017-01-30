@@ -21,4 +21,4 @@ echo ***Input host IP for consul agent configuration***
 read instance_IP
 
 #initialize consul agent on node
-sudo consul agent -server -data-dir="/tmp/consul" -bootstrap -advertise=“$instance_IP” -http-port=8500 -client=0.0.0.0 &
+sudo consul agent -server -data-dir="/tmp/consul" -bootstrap -advertise=$instance_IP -http-port=8500 -client=0.0.0.0 &
