@@ -2,7 +2,6 @@
 #Installs and starts Docker-engine
 
 cd
-clear
 
 #update packages
 sudo apt-get update
