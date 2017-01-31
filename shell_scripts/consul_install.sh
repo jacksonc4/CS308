@@ -17,7 +17,7 @@ sudo unzip *.zip
 sudo rm *.zip
 
 #grab user input for host IP
-echo ***Input host IP for consul agent configuration***
+echo ***Input host public IP for consul agent configuration***
 read instance_IP
 
 #initialize consul agent on node
