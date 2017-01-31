@@ -18,7 +18,7 @@ sudo apt-get install apt-transport-https ca-certificates
 curl -fsSL https://yum.dockerproject.org/gpg | sudo apt-key add -
 
 #verify the correct key ID is 58118E89F3A912897C070ADBF76221572C52609D
-apt-key fingerprint 58118E89F3A912897C070ADBF76221572C52609D
+sudo apt-key fingerprint 58118E89F3A912897C070ADBF76221572C52609D
 
 #Set up the stable docker repository
 sudo add-apt-repository "deb https://apt.dockerproject.org/repo/ ubuntu-$(lsb_release -cs) main"
