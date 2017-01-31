@@ -26,7 +26,8 @@ Back-end Setup
     * TCP port 22 for SSH
     * TCP port 80 for HTTPS
     
-  2. **Consul** which has the following port opened:
+  2. **Consul** which has the following ports opened:
+    * TCP port 8300 for agent communication
     * TCP port 8500 for agent communication
     
   3. **Docker** which has the following ports opened:
