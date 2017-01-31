@@ -50,4 +50,24 @@ Back-end Setup
 3. In your AWS EC2 console, set the name of one instance in each Availability Zone to Master to differentiate between the permission levels we will set later (an odd number of master nodes is recommended, 3 being ideal).
   * Go back to the Security Groups tab and add the Cassandra rule to each Master node.
 
-4. 
+4. SSH into each of your instances and clone this repository in the /usr/local/bin directory.
+  ```
+  cd /usr/local/bin
+  sudo git clone https://github.com/jacksonc4/CS308.git .
+
+  ```
+  
+5. Change the directory to the shell scripts folder in the newly cloned repository. Make sure that the docker_install and consul_install scripts are present.
+  ```
+  cd /CS308/shell_scripts
+  ls
+  consul_install.sh docker_install.sh
+  ```
+  
+6. Change the properties of the script files to executable, and then run the docker_install script on each node.
+  ```
+  sudo chmod +x ./consul_install.sh
+  sudo chmod +x ./docker_install.sh
+  ./docker_install.sh
+  ```
+ 
