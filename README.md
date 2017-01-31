@@ -84,10 +84,27 @@ Back-end Setup
   <input IP address>
   ```
   
-8. Once Consul has finished installing, change the current directory to /etc/init to find the docker.conf file. Add the following DOCKER_OPTS setting to the 'DOCKER_OPTS' variable.
+8. Once Consul has finished installing, change the current directory to /etc/init to find the docker.conf file. Add the following DOCKER_OPTS setting to the 'DOCKER_OPTS' variable (do this on every node, but only install consul on manager nodes).
   ```
   cd /etc/init
   sudo vi docker.config
   DOCKER_OPTS="-H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock --cluster-store=consul://<ip-of-consul-host>:8500/network --cluster-advertise=<this-nodes-private-ip>:2375"
   'esc' + ':x" + 'enter' to save and exit.
-
+  ```
+  
+9. Once you have set the DOCKER_OPTS, restart the Docker daemon and start a primary swarm manager on your primary Master node.
+  ```
+  sudo service docker restart
+  ```
+  Run this on your primary Master node:
+  ```
+  sudo docker run -d -p 4000:4000 --restart=always swarm --experimental manage -H :4000 --replication --advertise <Master0_ip>:4000 consul://<consul_agent_ip>:8500
+  ```
+  Then run this on however many alternate Master nodes your cluster has:
+  ```
+  sudo docker run -d -p 4000:4000 --restart=always swarm --experimental manage -H :4000 --replication --advertise <manager1_ip>:4000 consul://<consul_agent_ip>:8500
+  ```
+  Finally, run this command on each node to have them join the swarm:
+  ```
+  sudo docker run -d --restart=always swarm --experimental join --advertise=<node_ip>:2375 consul://<consul_agent_ip>:8500
+  ```
