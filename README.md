@@ -73,10 +73,8 @@ Back-end Setup
   sudo chmod +x ./docker_install.sh
   ./docker_install.sh
   Respond yes to the prompt. 
-  When the vi editor opens, press 'i' to enter insert mode and paste this link inside (deb https://apt.dockerproject.org/repo ubuntu-xenial main), then press escape and ':x + enter' to save and exit.
-  Respond yes to the prompt again twice.
   ```
-7. Once Docker has finished installing, go back to the scripts folder and execute the consul_install script on the primary Master node. To create the consul agent, you will need to input the private IP address of your AWS instance.
+7. Once Docker has finished installing, go back to the scripts folder and execute the consul_install script on the primary Master node. To create the consul agent, you will need to input the public IP address of your AWS instance.
   ```
   cd /usr/local/bin/CS308/shell_scripts
   ./consul_install.sh
