@@ -20,11 +20,7 @@ Back-end Setup
 ---
 >  **Note:** An odd number of AWS instances is recommended for this setup to maintain a quorum number of nodes.
 
-1. Create your nodes on AWS and distribute them among the different Availability Zones evenly (i.e. node1 in US-east-1a, node2 in US-east-1b, node3 in US-east-1c). We use nine nodes in our testing.
-
-2. In your AWS EC2 console, set the name one instance in each Availability Zone to 'Master' to differentiate between the permission levels we will set later.
-
-3. Under the 'Security Groups' tab, create the following new rules:
+1. Under the 'Security Groups' tab, create the following new rules:
 
   1. **General** which has the following ports opened:
     * TCP port 22 for SSH
@@ -47,4 +43,11 @@ Back-end Setup
     * TCP port 7199 for JMX monitoring (node status)
     * TCP port 9042 for CQL native transport
     * TCP port 9162 for Thrift client API
+    
+2. Create your nodes on AWS and distribute them among the different Availability Zones evenly (i.e. node1 in US-east-1a, node2 in US-east-1b, node3 in US-east-1c). We use nine nodes in our testing, so each of the three master nodes has two workers under it.
+  * In the Security Groups tab of instance creation, set the General, Docker, and Redis rules as the groups for each node.
 
+3. In your AWS EC2 console, set the name of one instance in each Availability Zone to Master to differentiate between the permission levels we will set later (an odd number of master nodes is recommended, 3 being ideal).
+  * Go back to the Security Groups tab and add the Cassandra rule to each Master node.
+
+4. 
