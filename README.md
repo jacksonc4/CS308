@@ -84,4 +84,10 @@ Back-end Setup
   <input IP address>
   ```
   
-8. 
+8. Once Consul has finished installing, change the current directory to /etc/init to find the docker.conf file. Add the following DOCKER_OPTS setting to the 'DOCKER_OPTS' variable.
+  ```
+  cd /etc/init
+  sudo vi docker.config
+  DOCKER_OPTS="-H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock --cluster-store=consul://<ip-of-consul-host>:8500/network --cluster-advertise=<this-nodes-private-ip>:2375"
+  'esc' + ':x" + 'enter' to save and exit.
+
