@@ -54,9 +54,11 @@ Back-end Setup
 3. In your AWS EC2 console, set the name of one instance in each Availability Zone to Master to differentiate between the permission levels we will set later (an odd number of master nodes is recommended, 3 being ideal).
   * Go back to the Security Groups tab and add the Cassandra and Consul rules to each Master node.
   
-4. SSH into each of your instances and clone this repository in the /usr/local/bin directory.
+4. SSH into each of your instances and clone this repository into a new folder in the /usr/local/bin directory.
   ```
   cd /usr/local/bin
+  sudo mkdir CS308
+  cd CS308
   sudo git clone https://github.com/jacksonc4/CS308.git .
 
   ```
