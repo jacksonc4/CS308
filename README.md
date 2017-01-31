@@ -26,18 +26,21 @@ Back-end Setup
     * TCP port 22 for SSH
     * TCP port 80 for HTTPS
     
-  2. **Docker** which has the following ports opened:
+  2. **Consul** which has the following port opened:
+    * TCP port 8500 for agent communication
+    
+  3. **Docker** which has the following ports opened:
     * TCP port 2375 for docker REST API 
     * TCP port 2377 for cluster management communications
     * TCP and UDP ports 4789 for overlay network traffic
     * TCP and UDP ports 7946 for node communications
     * (optional) TCP port 50 for encrypted overlay networks using [--opt encrypted]
 
-  3. **Redis** which has the following ports opened:
+  4. **Redis** which has the following ports opened:
     * TCP and UDP port 6379 for Redis server connection
     * TCP and UDP port 16379 for running Redis in cluster mode
     
-  4. **Cassandra** which has the following ports opened:
+  5. **Cassandra** which has the following ports opened:
     * TCP port 7000 for cluster node communications
     * TCP port 7001 for SSL internode cluster communications
     * TCP port 7199 for JMX monitoring (node status)
@@ -48,8 +51,8 @@ Back-end Setup
   * In the Security Groups tab of instance creation, set the General, Docker, and Redis rules as the groups for each node.
 
 3. In your AWS EC2 console, set the name of one instance in each Availability Zone to Master to differentiate between the permission levels we will set later (an odd number of master nodes is recommended, 3 being ideal).
-  * Go back to the Security Groups tab and add the Cassandra rule to each Master node.
-
+  * Go back to the Security Groups tab and add the Cassandra and Consul rules to each Master node.
+  
 4. SSH into each of your instances and clone this repository in the /usr/local/bin directory.
   ```
   cd /usr/local/bin
@@ -57,9 +60,9 @@ Back-end Setup
 
   ```
   
-5. Change the directory to the shell scripts folder in the newly cloned repository. Make sure that the docker_install and consul_install scripts are present.
+5. Change the directory to the newly created shell scripts folder. Make sure that the docker_install and consul_install scripts are present.
   ```
-  cd /CS308/shell_scripts
+  cd /shell_scripts
   ls
   consul_install.sh docker_install.sh
   ```
@@ -69,5 +72,15 @@ Back-end Setup
   sudo chmod +x ./consul_install.sh
   sudo chmod +x ./docker_install.sh
   ./docker_install.sh
+  Respond yes to the prompt. 
+  When the vi editor opens, press 'i' to enter insert mode and paste this link inside (deb https://apt.dockerproject.org/repo ubuntu-xenial main), then press escape and ':x + enter' to save and exit.
+  Respond yes to the prompt again twice.
   ```
- 
+7. Once Docker has finished installing, go back to the scripts folder and execute the consul_install script on the primary Master node. To create the consul agent, you will need to input the private IP address of your AWS instance.
+  ```
+  cd /usr/local/bin/CS308/shell_scripts
+  ./consul_install.sh
+  <input IP address>
+  ```
+  
+8. 
