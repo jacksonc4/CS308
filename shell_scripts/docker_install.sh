@@ -1,8 +1,6 @@
 #!/bin/bash
 #Installs and starts Docker-engine
 
-cd
-
 #update packages
 sudo apt-get update
 
