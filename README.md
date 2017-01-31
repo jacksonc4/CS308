@@ -1,7 +1,7 @@
 # CS308 VCU Capstone Project
 
 ## Active/Active Cloud Infrastructure 
-All of the necessary files can be downloaded from https://github.com/jacksonc4/CS308.git
+The cloud platform for this project is Amazon Web Services (https://aws.amazon.com/). All of the necessary files can be downloaded from https://github.com/jacksonc4/CS308.git
 
 Group members
 ---
