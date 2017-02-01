@@ -32,5 +32,3 @@ curl -L https://github.com/docker/machine/releases/download/v0.9.0/docker-machin
 
 #Check the installation by displaying the Machine version
 sudo docker-machine version
-
-echo Docker Machine successfuly installed.
