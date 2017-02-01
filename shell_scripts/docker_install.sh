@@ -25,4 +25,12 @@ sudo add-apt-repository "deb https://apt.dockerproject.org/repo/ ubuntu-$(lsb_re
 sudo apt-get update
 sudo apt-get -y install docker-engine
 
-echo Docker is running.
+#Download the Docker Machine binary and extract it to your file path
+curl -L https://github.com/docker/machine/releases/download/v0.9.0/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine &&
+  chmod +x /tmp/docker-machine &&
+  sudo cp /tmp/docker-machine /usr/local/bin/docker-machine
+
+#Check the installation by displaying the Machine version
+sudo docker-machine version
+
+echo Docker Machine successfuly installed.
