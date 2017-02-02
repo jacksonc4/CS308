@@ -24,3 +24,18 @@ sudo add-apt-repository "deb https://apt.dockerproject.org/repo/ ubuntu-$(lsb_re
 #update packages again and install docker-engine
 sudo apt-get update
 sudo apt-get -y install docker-engine
+
+#Pulls the necessary utility images to docker 
+#from Docker Hub.
+
+#Pull the latest Java Image
+sudo docker pull java
+
+#Pull the latest Cassandra Image
+sudo docker pull cassandra
+
+#Pull the latest Redis Image
+sudo docker pull redis
+
+#Pull the latest Consul Image 
+sudo docker pull consul
