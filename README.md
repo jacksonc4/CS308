@@ -77,33 +77,33 @@ Service Set-up
   ./docker_install.sh
   ```
   
-7. Skip this for now, a Docker image for Consul is pulled from Docker hub in the Docker installation script which is easier to work with. ~~Once Docker has finished installing, go back to the scripts folder and execute the consul_install script on your Master nodes. To create the consul agent, you will need to input the private IP address of your AWS instance.
-  ~```
+7. Skip this for now, a Docker image for Consul is pulled from Docker hub in the Docker installation script which is easier to work with. ~~Once Docker has finished installing, go back to the scripts folder and execute the consul_install script on your Master nodes. To create the consul agent, you will need to input the private IP address of your AWS instance.~~
+  ```
   cd /usr/local/bin/CS308/shell_scripts
   ./consul_install.sh
   <input IP address>
-  ~```
+  ```
   
-8. ~~Once Consul has finished installing, edit the Docker Upstart file in the /etc/default directory and add the following setting to the 'DOCKER_OPTS' variable (do this on every node).
+8. ~~Once Consul has finished installing, edit the Docker Upstart file in the /etc/default directory and add the following setting to the 'DOCKER_OPTS' variable (do this on every node).~~
   ```
   sudo vi /etc/default/docker
   "-H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock --cluster-store=consul://<ip-of-consul-host>:8500/network --cluster-advertise=<this-nodes-private-ip>:2376"
   'esc' + ':x" + 'enter' to save and exit.
-  ```~~
+  ```
   
-9. For testing simplicity, we will use the Docker swarm commands for now. ~~Once you have added the DOCKER_OPTS setting, restart the Docker daemon and start a primary swarm manager on your primary Master node.
+9. For testing simplicity, we will use the Docker swarm commands for now. ~~Once you have added the DOCKER_OPTS setting, restart the Docker daemon and start a primary swarm manager on your primary Master node.~~
   ```
   sudo service docker restart
   ```
-  Run this on your primary Master node:
+  ~~Run this on your primary Master node:~~
   ```
   sudo docker run -d -p 4000:4000 --restart=always swarm --experimental manage -H :4000 --replication --advertise <MasterX_ip>:4000 consul://<consul_agent_ip>:8500
   ```
-  Then run this on however many alternate Master nodes your cluster has:
+  ~~Then run this on however many alternate Master nodes your cluster has:~~
   ```
   sudo docker run -d -p 4000:4000 --restart=always swarm --experimental manage -H :4000 --replication --advertise <manager(X+1)_ip>:4000 consul://<consul_agent_ip>:8500
   ```
-  Finally, run this command on each node that will be participating in the swarm:
+  ~~Finally, run this command on each node that will be participating in the swarm:~~
   ```
   sudo docker run -d swarm --experimental join --advertise=<node_ip>:2375 consul://<consul_agent_ip>:8500
-  ```~~
+  ```
