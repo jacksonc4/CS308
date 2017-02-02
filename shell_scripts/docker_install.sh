@@ -36,6 +36,3 @@ sudo docker pull cassandra
 
 #Pull the latest Redis Image
 sudo docker pull redis
-
-#Pull the latest Consul Image 
-sudo docker pull consul
