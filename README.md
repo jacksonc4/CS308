@@ -65,3 +65,7 @@ Service Set-up
   sudo chmod +x ./docker_install.sh
   ./docker_install.sh
   ```
+  
+###Docker Swarm Set-up
+ ---
+Now that Docker Engine has been set up on each of your nodes, it is time to create a swarm to network them together.
