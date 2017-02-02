@@ -77,7 +77,7 @@ Service Set-up
   ./docker_install.sh
   ```
   
-7. Skip this for now, a Docker image for Consul is pulled from Docker hub in the Docker installation script which is easier to work with. ~~Once Docker has finished installing, go back to the scripts folder and execute the consul_install script on your Master nodes. To create the consul agent, you will need to input the private IP address of your AWS instance.~~
+7. Skip steps 7 - 9 for now, a Docker image for Consul is pulled from Docker hub in the Docker installation script which is easier to work with. ~~Once Docker has finished installing, go back to the scripts folder and execute the consul_install script on your Master nodes. To create the consul agent, you will need to input the private IP address of your AWS instance.~~
   ```
   cd /usr/local/bin/CS308/shell_scripts
   ./consul_install.sh
