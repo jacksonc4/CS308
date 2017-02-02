@@ -25,23 +25,19 @@ Service Set-up
   1. **General** which has the following ports opened:
     * TCP port 22 for SSH
     * TCP port 80 for HTTPS
-    
-  2. **Consul** which has the following ports opened:
-    * TCP port 8300 for agent communication
-    * TCP port 8500 for agent communication
-    
-  3. **Docker** which has the following ports opened:
+
+  2. **Docker** which has the following ports opened:
     * TCP port 2375 for docker REST API 
     * TCP port 2377 for cluster management communications
     * TCP and UDP ports 4789 for overlay network traffic
     * TCP and UDP ports 7946 for node communications
     * (optional) TCP port 50 for encrypted overlay networks using [--opt encrypted]
 
-  4. **Redis** which has the following ports opened:
+  3. **Redis** which has the following ports opened:
     * TCP and UDP port 6379 for Redis server connection
     * TCP and UDP port 16379 for running Redis in cluster mode
     
-  5. **Cassandra** which has the following ports opened:
+  4. **Cassandra** which has the following ports opened:
     * TCP port 7000 for cluster node communications
     * TCP port 7001 for SSL internode cluster communications
     * TCP port 7199 for JMX monitoring (node status)
@@ -52,7 +48,7 @@ Service Set-up
   * In the Security Groups tab of instance creation, set the General, Docker, and Redis rules as the groups for each node.
 
 3. In your AWS EC2 console, set the name of one instance in each Availability Zone to Master to differentiate between the permission levels we will set later (an odd number of master nodes is recommended, 3 being ideal).
-  * Go back to the Security Groups tab and add the Cassandra and Consul rules to each Master node.
+  * Go back to the Security Groups tab and add the Cassandra rules to each Master node.
   
 4. SSH into each of your instances and clone this repository into a new folder in the /usr/local/bin directory.
   ```
@@ -63,47 +59,9 @@ Service Set-up
 
   ```
   
-5. Change the directory to the newly created shell scripts folder. Make sure that the docker_install and consul_install scripts are present.
+5. Change the properties of the script file to executable, and then run the docker_install script on each node.
   ```
   cd /shell_scripts
-  ls
-  consul_install.sh docker_install.sh
-  ```
-  
-6. Change the properties of the script files to executable, and then run the docker_install script on each node.
-  ```
-  sudo chmod +x ./consul_install.sh
   sudo chmod +x ./docker_install.sh
   ./docker_install.sh
-  ```
-  
-7. Skip steps 7 - 9 for now, a Docker image for Consul is pulled from Docker hub in the Docker installation script which is easier to work with. ~~Once Docker has finished installing, go back to the scripts folder and execute the consul_install script on your Master nodes. To create the consul agent, you will need to input the private IP address of your AWS instance.~~
-  ```
-  cd /usr/local/bin/CS308/shell_scripts
-  ./consul_install.sh
-  <input IP address>
-  ```
-  
-8. ~~Once Consul has finished installing, edit the Docker Upstart file in the /etc/default directory and add the following setting to the 'DOCKER_OPTS' variable (do this on every node).~~
-  ```
-  sudo vi /etc/default/docker
-  "-H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock --cluster-store=consul://<ip-of-consul-host>:8500/network --cluster-advertise=<this-nodes-private-ip>:2376"
-  'esc' + ':x" + 'enter' to save and exit.
-  ```
-  
-9. For testing simplicity, we will use the Docker swarm commands for now. ~~Once you have added the DOCKER_OPTS setting, restart the Docker daemon and start a primary swarm manager on your primary Master node.~~
-  ```
-  sudo service docker restart
-  ```
-  ~~Run this on your primary Master node:~~
-  ```
-  sudo docker run -d -p 4000:4000 --restart=always swarm --experimental manage -H :4000 --replication --advertise <MasterX_ip>:4000 consul://<consul_agent_ip>:8500
-  ```
-  ~~Then run this on however many alternate Master nodes your cluster has:~~
-  ```
-  sudo docker run -d -p 4000:4000 --restart=always swarm --experimental manage -H :4000 --replication --advertise <manager(X+1)_ip>:4000 consul://<consul_agent_ip>:8500
-  ```
-  ~~Finally, run this command on each node that will be participating in the swarm:~~
-  ```
-  sudo docker run -d swarm --experimental join --advertise=<node_ip>:2375 consul://<consul_agent_ip>:8500
   ```
