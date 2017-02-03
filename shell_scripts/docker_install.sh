@@ -34,5 +34,5 @@ sudo docker pull java
 #Pull the latest Cassandra Image
 sudo docker pull cassandra
 
-#Pull the latest Redis Image
-sudo docker pull redis
+#Pull the latest bitnami modded Redis Image
+sudo docker pull bitnami/redis:latest
