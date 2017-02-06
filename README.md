@@ -62,7 +62,6 @@ Instance Set-up
   ./cassandra_install.sh
   ```
  
- 
 ###Cassandra Cluster Set-up
  ---
 Now that Cassandra has been installed on each of your nodes, the cluster has to be configured to get each node gossiping.
