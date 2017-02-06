@@ -122,7 +122,7 @@ where the DC is the name of the AWS region where you have nodes deployed (i.e. u
 Once the keyspace has been created, grab the demo code from the Cassandra file in this repo. Open the source code of the createDB.java file and edit the following lines of code to suit your needs:
 ```
   //Change x to be equal to the data volume you wish to send to the cluster
-	TextGenerator.createFile(x);
+  TextGenerator.createFile(x);
   
   //Change the contatct point to be the public IP of whichever node you wish to connect to
   cluster = Cluster.builder().addContactPoint("public IP").withPort(9042).build();
