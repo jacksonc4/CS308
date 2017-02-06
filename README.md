@@ -41,7 +41,7 @@ Instance Set-up
     * TCP port 9042 for CQL native transport
     * TCP port 9162 for Thrift client API
     
-2. Create your nodes on AWS using the Ubuntu 16.04 AMI and distribute them among the different Availability Zones to see how different regions interact (i.e. node1 in US-east-1a, node2 in US-east-1b, node3 in US-east-1c). Cassandra required m3.medium AWS instance types at minimum to run properly in our testing.
+2. Choose two or more AWS regions to provision your nodes in, create them using the Ubuntu 16.04 AMI, and distribute them among the different Availability Zones (i.e. node1 in US-east-1a, node2 in US-east-1b, node3 in US-west-2a, etc). Cassandra required m3.medium AWS instance types at minimum to run properly in our testing.
   * In the Security Groups tab of instance creation, set the General and Cassandra rules as the groups for each node.
   
 3. SSH into each of your instances and clone this repository into a new folder in the /usr/local/bin directory.
