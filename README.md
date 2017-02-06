@@ -14,9 +14,9 @@ Edwin Lobo
 Description
 ---
 
-The files in this repository will set up essential utilities on your AWS instances for an intercommunicating cluster of AWS nodes. 
+This repository will guide you through the steps necessary to create and test a multi-regional cluster of AWS nodes running the NoSQL database Cassandra.
 
-Service Set-up
+Instance Set-up
 ---
 >  **Note:** An odd number of AWS instances is recommended for this setup to maintain a quorum number of nodes.
 
@@ -103,3 +103,18 @@ Once each node has been brought up, verify that the cluster is up and running wi
 ```
 nodetool status
 ```
+
+###Cassandra Cluster testing
+ ---
+Now that the Cassandra cluster has been created, it may be tested using the Cassandra demo code. Before using this, a keyspace called 'demo' must be created.
+
+Use the Cassandra Query Language shell on any node to create the keyspace with the following command: 
+```
+cqlsh <privateIP of node>
+```
+
+Now, create the demo keyspace:
+```
+CREATE KEYSPACE demo WITH replication = {'class':'NetworkTopologyStrategy', '<first DC>':<desired # of replicas>', . . . , '<last DC>':<desired # of replicas>'} AND durable_writes = true;
+```
+where the DC is the name of the AWS region where you have nodes deployed (i.e. us-west-2), and number of replicas determines how many copies of your data are sent throughout the ring (an odd number > 2 is recommended).
