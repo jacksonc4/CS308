@@ -72,7 +72,9 @@ On each node, do the following:
 * Point to the Cassandra directory, and look for the cassandra.yaml and cassandra-rackdc.properties files.
   ```
   cd /etc/cassandra/
+  
   ls
+  
   cassandra.yaml  cassandra-rackdc.properties . . .  
   ```
 * Use your preferred text editor (vim for us) to edit the following properties in the cassandra.yaml file:
