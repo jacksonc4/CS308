@@ -118,3 +118,24 @@ Now, create the demo keyspace:
 CREATE KEYSPACE demo WITH replication = {'class':'NetworkTopologyStrategy', '<first DC>':<desired # of replicas>', . . . , '<last DC>':<desired # of replicas>'} AND durable_writes = true;
 ```
 where the DC is the name of the AWS region where you have nodes deployed (i.e. us-west-2), and number of replicas determines how many copies of your data are sent throughout the ring (an odd number > 2 is recommended).
+
+Once the keyspace has been created, grab the demo code from the Cassandra file in this repo. Open the source code of the createDB.java file and edit the following lines of code to suit your needs:
+```
+  //Change x to be equal to the data volume you wish to send to the cluster
+	TextGenerator.createFile(x);
+  
+  //Change the contatct point to be the public IP of whichever node you wish to connect to
+  cluster = Cluster.builder().addContactPoint("public IP").withPort(9042).build();
+```
+
+After the code has completed its execution, you may use cqlsh again to verify that the data has been sent to the cluster and distributed throughout the ring (there will be several results to tab through depending on the data volume sent to cluster).
+```
+cqlsh <public IP of node>
+use demo;
+select * from users;
+```
+
+Use the following command to drop the sample table:
+```
+drop table users;
+```
