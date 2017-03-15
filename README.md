@@ -62,7 +62,7 @@ Instance Set-up
   ./cassandra_install.sh
   ```
  
-###Cassandra Cluster Set-up
+Cassandra Cluster Set-up
  ---
 Now that Cassandra has been installed on each of your nodes, the cluster has to be configured to get each node gossiping.
 
@@ -105,7 +105,7 @@ Once each node has been brought up, verify that the cluster is up and running wi
 nodetool status
 ```
 
-###Cassandra Cluster testing
+Cassandra Cluster testing
  ---
 Now that the Cassandra cluster has been created, it may be tested using the Cassandra demo code. Before using this, a keyspace called 'demo' must be created.
 
