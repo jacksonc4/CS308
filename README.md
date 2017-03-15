@@ -99,11 +99,22 @@ At this point, the node configurations should be properly set. Use the following
 ```
 sudo /etc/init.d/cassandra start
 ```
+The output should look like this:
+![Screenshot](cassandra_start_confirmation.png)
+
+If not, then something may have went wrong with installation.
 
 Once each node has been brought up, verify that the cluster is up and running with
 ```
 nodetool status
 ```
+Cluster with seeds booted first:
+---
+![Screenshot](active_cluster.png)
+
+Cluster with all nodes active:
+---
+![Screenshot](active_seeds.png)
 
 Cassandra Cluster testing
  ---
@@ -113,6 +124,8 @@ Use the Cassandra Query Language shell on any node to create the keyspace with t
 ```
 cqlsh <privateIP of node>
 ```
+This should look like:
+![Screenshot](connecting_to_cluster.png)
 
 Now, create the demo keyspace:
 ```
