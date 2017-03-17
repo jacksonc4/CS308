@@ -31,10 +31,13 @@ sudo /etc/init.d/cassandra stop
 #Clears the default system data to avoid data conflicts
 sudo rm -rf /var/lib/cassandra/data/system/*
 
-#Updates the cassandra-rackdc.properties and cassandra.yaml files
+#Removes the old cassandra-rackdc.properties and cassandra.yaml files
 cd /etc/cassandra
 sudo rm -rf cassandra-rackdc.properties
 sudo rm -rf cassandra.yaml
+cd
+
+#Moves the new files into the cassandra folder
 cd CS308
 sudo mv cassandra-rackdc.properties /etc/cassandra
 sudo mv cassandra.yaml /etc/cassandra
