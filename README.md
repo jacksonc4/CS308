@@ -2,6 +2,7 @@
 
 ## Active/Active Cloud Infrastructure 
 The cloud platform for this project is Amazon Web Services (https://aws.amazon.com), and the persistent database will be Apache Cassandra (http://cassandra.apache.org/).
+
 Group members
 ---
 Curtis Jackson 
