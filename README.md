@@ -1,7 +1,7 @@
 # CS308 VCU Capstone Project
 
 ## Active/Active Cloud Infrastructure 
-The cloud platform for this project is Amazon Web Services (https://aws.amazon.com).
+The cloud platform for this project is Amazon Web Services (https://aws.amazon.com), and the persistent database will be Apache Cassandra (http://cassandra.apache.org/).
 Group members
 ---
 Curtis Jackson 
@@ -13,7 +13,16 @@ Edwin Lobo
 Description
 ---
 
-This repository will guide you through the steps necessary to create and test a multi-regional cluster of AWS nodes running the NoSQL database Cassandra.
+This repo will guide you through the steps necessary to create and test a multi-regional cluster of AWS nodes running the NoSQL database Cassandra.
+
+Why Cassandra?
+---
+* Cassandra is a highly available NoSQL database designed to handle large workloads
+* With no single point of failure, it is widely used in large distributed systems due to its resiliency
+* Cassandra uses gossip protocol to forward replicas of a node's data to other nodes participating in a cluster
+* Cassandra may be made aware of which geographical region it is deployed in thanks to endpoint snitches 
+* Cassandra scales horizontally very easily to handle increasing system demand - new nodes may be bootstrapped to the cluster in about a minute
+* Cassandra supports efficient cross-region replication
 
 Instance Set-up
 ---
