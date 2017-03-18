@@ -29,9 +29,15 @@ Instance Set-up
   * Take note of the group Ids that are given after group creation to use when creating EC2 instances.
     
 2. Create some EC2 instances to test on with the following AWS cli commands:
+  * Two key-pairs need to be created first:
 ```
-aws ec2 --region us-west-2 run-instances image-id ami-f4cc1de2 --security-group-ids <the Id for the us-west-2 security group previously created> --count 2 --instance-type m3.medium --key-name <previously created west key, omit the .pem>
-aws ec2 --region us-east-1 run-instances image-id ami-f4cc1de2 --security-group-ids <the Id for the us-east-1 security group previously created> --count 2 --instance-type m3.medium --key-name <previously created east key, omit the .pem>
+aws ec2 --region us-west-2 create-key-pair --key-name westCluster
+aws ec2 --region us-east-1 create-key-pair --key-name eastCluster
+```
+  * Spin up some EC2 instances:
+```
+aws ec2 --region us-west-2 run-instances --image-id ami-a58d0dc5 --security-group-ids <the Id for the us-west-2 security group previously created> --count 3 --instance-type m3.medium --key-name westCluster
+aws ec2 --region us-east-1 run-instances --image-id ami-f4cc1de2 --security-group-ids <the Id for the us-east-1 security group previously created> --count 3 --instance-type m3.medium --key-name eastCluster
 ```
   
 3. SSH into each of your instances and clone this repo to the main directory.
