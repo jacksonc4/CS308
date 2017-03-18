@@ -41,6 +41,7 @@ aws ec2 --region us-east-1 run-instances --image-id ami-f4cc1de2 --security-grou
 ```
   
 3. SSH into each of your instances and clone this repo to the main directory.
+  * Wait a minute for the instances to initialize, and then get the public IP 
   
 4. Change the properties of the cassandra_install script file to executable, and then run the cassandra_install script on each node.
   ```
