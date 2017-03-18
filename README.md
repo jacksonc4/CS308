@@ -83,20 +83,16 @@ On each node, do the following:
   cassandra.yaml  cassandra-rackdc.properties . . .  
   ```
 * Use your preferred text editor (vim for us) to edit the following properties in the cassandra.yaml file:
-  1. Cluster Name
-  2. Listen Address
-  3. Broadcast Address
-  4. rpc Address
-  5. Seeds
-  6. Endpoint Snitch
+  1. Listen Address
+  2. Broadcast Address
+  3. rpc Address
+  4. Seeds
   
 * Each of these should be set to the following, depending on the current node:
-  1. cluster_name: 'Name does not matter -- but must be the same on every node'
-  2. listen_address: privateIP of the current node
-  3. broadcast_address: publicIP of the current node
-  4. rpc_address: privateIP of the current node
-  5. seeds: "publicIPs of each desired seed node -- must have at least one per datacenter, separated by a comma"
-  6. endpoint_snitch: Ec2MultiRegionSnitch
+  1. listen_address: privateIP of the current node
+  2. broadcast_address: publicIP of the current node
+  3. rpc_address: privateIP of the current node
+  4. seeds: "publicIPs of each desired seed node -- must have at least one per datacenter, separated by a comma"
   
 * Once the settings are properly configured, save the updates and exit from the text editor. Next, edit the cassandra-rackdc.properties file in the same way.
   - On each node, scroll to the bottom and uncomment the line reading 'prefer_local.' Save the update and exit from the text editor.
