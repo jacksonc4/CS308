@@ -1,0 +1,20 @@
+dyn_o_mite:
+  datacenter: <aws datacenter name>
+  rack: <aws availability zone>
+  dyn_listen: <private IP>:8101
+  data_store: 0
+  listen: <private IP>:8102
+  dyn_seeds:
+  - <seed one:8101>:<rack>:<datacenter>:<token>
+  - <seed two … etc>
+  auto_eject_hosts: true
+  server_retry_timeout: 30000
+  server_failure_limit: 3
+  dyn_seed_provider: simple_provider
+  servers:
+  - 127.0.0.1:22122:1
+  tokens: 0
+  hash: murmur3
+  secure_server_option: datacenter
+  write_consistency: dc_one
+  pem_key_file: /etc/dynomitedb/dynomite.pem
