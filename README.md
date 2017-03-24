@@ -60,6 +60,7 @@ aws ec2 --region us-east-1 describe-instances
 ```
 ssh -i <keyName> ubuntu@<publicIP>
 ```
+  * Clone the repo to the EC2 instances, then cd to the shell_scripts folder
   
 4. Change the properties of the cassandra_install script file to executable, and then run the cassandra_install script on each node.
   ```
@@ -70,6 +71,8 @@ ssh -i <keyName> ubuntu@<publicIP>
  
 Cassandra Cluster Set-up
  ---
+* Note: if the AWS cluster is stopped for whatever reason, then the cassandra.yaml files for the seed nodes need to be updated. Update the broadcast_address fields with the newly assigned public IP in each seed, and update the seeds fields with each updated seed address. Restart the seed nodes and run nodetool join on the rest of the cluster to restore it. 
+
 Now that Cassandra has been installed on each of your nodes, the cluster has to be configured to get each node gossiping.
 
 On each node, do the following:
