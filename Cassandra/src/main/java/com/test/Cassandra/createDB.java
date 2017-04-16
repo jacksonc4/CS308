@@ -5,14 +5,19 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.Scanner;
 import com.datastax.driver.core.Cluster;
+import com.datastax.driver.core.ConsistencyLevel;
+import com.datastax.driver.core.QueryOptions;
 import com.datastax.driver.core.Session;
+import com.datastax.driver.core.policies.DCAwareRoundRobinPolicy;
+import com.datastax.driver.core.policies.RoundRobinPolicy;
 
 public class createDB extends TextGenerator {
 
-	private static String userID;
-	private static String firstName;
-	private static String lastName;
-	private static String someClass;
+	private static String username;
+	private static String email;
+	private static String fullname;
+	private static String password;
+	private static String accountNumber;
 	
 	public createDB() {
 		
@@ -24,17 +29,18 @@ public class createDB extends TextGenerator {
 	public static String createTable(String keyspaceName, String tableName) {
 		
 		return "CREATE TABLE " + keyspaceName + "." + tableName + " ("
-				+ "userID text PRIMARY KEY,"
-				+ " first_name text,"
-				+ " last_name text,"
-				+ " class text);";
+				+ "username text PRIMARY KEY," 
+				+ " email text," 
+				+ " fullname text," 
+				+ " password text," 
+				+ " accountNumber text);";
 		
 	}
 	
 	//Helper method to make the insert operation easier to handle
 	public static String insertInto(String keyspaceName, String tableName) {
 		
-		return "INSERT INTO " + keyspaceName + "." + tableName + "(userID, first_name, last_name, class)"
+		return "INSERT INTO " + keyspaceName + "." + tableName + "(username, email, fullname, password, accountNumber)"
 				+ " VALUES ";
 		
 	}
@@ -48,20 +54,21 @@ public class createDB extends TextGenerator {
 			
 			//Change the value in createFile to whichever value
 			//the teseter needs to test.
-			TextGenerator.createFile(1000);
+			TextGenerator.createFile(3);
 			
 			//Builds Cassandra cluster and adds the home IP address 
 			//to it's destination.
-			cluster = Cluster.builder().addContactPoint("<public IP of node to connect to>").withPort(9042).build();
+			cluster = Cluster.builder().addContactPoints("34.210.6.214", "34.209.186.150", "54.84.11.178", "34.207.223.229").withPort(9042).withQueryOptions(new QueryOptions() 
+					.setConsistencyLevel(ConsistencyLevel.LOCAL_QUORUM)).build();
 			
 			//Begins new session and connects cluster to the demo 
 			//keyspace, and then uses it.
-			Session session = cluster.connect("demo");
-			session.execute("USE demo");
+			Session session = cluster.connect("cassandrabankapp");
+			session.execute("USE cassandrabankapp");
 			
 			//Executes the createTable method to create the sample 
 			//table.
-			session.execute(createTable("demo", "users"));
+			session.execute(createTable("cassandrabankapp", "member"));
 
 			//Creates file and reader to read in users.txt context
 			File file = new File("users.txt");
@@ -76,17 +83,18 @@ public class createDB extends TextGenerator {
 			
 			while((line = reader.readLine()) != null) {
 				
-				String[]parts = line.split(" ", 4);
+				String[]parts = line.split(",", 5);
 				
-				if(parts.length == 4) {
+				if (parts.length == 5) {
 					
-					userID = parts[0];
-					firstName = parts[1];
-					lastName = parts[2];
-					someClass = parts[3];
+					username = parts[0];						
+					email = parts[1];						
+					fullname = parts[2];						
+					password = parts[3];					
+					accountNumber = parts[4];
 					
-					session.execute(insertInto("demo", "users") +
-							"('"+userID+"','"+firstName+"','"+lastName+"','"+someClass+"');");
+					session.execute(insertInto("cassandrabankapp", "member") +
+							"('"+username+"','"+email+"','"+fullname+"','"+password+"','"+accountNumber+"');");
 					
 				} else {
 					

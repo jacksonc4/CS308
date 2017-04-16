@@ -18,11 +18,11 @@ public class TextGenerator {
 		
 		for(int i = 1; i < size+1; i++) {
 			
-			outputFile.write(i + " fName" + i + " lName" + i + " class" + i + "\n");
+			outputFile.write("User" + i + "," + i + "@email.com," + "FNameLName" + i + ",password" + i + ",account" + i + "\n");
 			
 		}
 		
-		System.out.println("\nWrite Successful!");
+		System.out.println("\nFile Written.");
 		
 		outputFile.close();
 		
