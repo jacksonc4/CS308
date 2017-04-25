@@ -1,0 +1,43 @@
+Dynamite/Dyno client notes:
+dynamite - thin layer on top of redis, makes a non-distributed system a distributed system
+
+dyno - java client for dynomite, built as a wrapper around jedis
+
+dyno will handle automatic failover by detecting whether or not a node is in discovery
+
+dyno is token aware and uses the same hashing all as dynomite, dyno will route data to the proper node depending on the hash
+
+AWS CLI -> specify region with the --region flag
+stop instance: aws ec2 stop-instances --instance-ids <instance ID>
+start instance: aws ec2 start-instances --instance-ids <instance ID>
+create instance: aws ec2 --region us-east-1 run-instances --image-id ami-f4cc1de2 --security-group-ids sg-a3bc36df (for multiple groups do not use commas) --count 1 --instance-type t2.micro --key-name <keyName (omit .pem and file path)
+describe instance: aws ec2 describe-instances —instance-ids <instance Id>
+
+subnets in west:
+- a: subnet-b6070fd2
+- b: subnet-f35b7985
+- c: subnet-0c7de654
+
+subnets in east:
+- a: subnet-9a8268b7
+- b: subnet-fa1dc7b3
+- c: subnet-efb25ab4
+- d: subnet-8351c1e6
+- e: subnet-3711fd0b
+
+try leaving listen addresses empty next time and see if cassandra finds the address
+- it did, only broadcast/seeds need to be updated
+- from dead stop -> start all nodes, update broadcasts/seeds, sudo /etc/init.d/cassandra restart on all seeds first, and then on the others one-by-one
+
+Java driver is sensitive to datacenter names (must be exactly the same as shown in node tool status)
+
+Sample keyspaces…
+create keyspace demo with replication = {'class':'NetworkTopologyStrategy', 'us-east':'2', 'us-west-2':'2'} and durable_writes = true;
+
+cassandra and load balancers: Cassandra was designed to avoid the need for a load balancer — putting them between cassandra and clients is harmful to performance, cost, availability, debugging, scaling, and testing (does use some internal balancing).
+
+replication factor should not exceed number of racks per DC
+
+spread nodes among different subregions (racks) -> this follows the physical data store logic that one DC will lose all data in the event of a local outage
+
+when creating key space -> use one replica per rack
