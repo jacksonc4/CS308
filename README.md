@@ -158,3 +158,8 @@ Use the following command to drop the sample table:
 ```
 drop table users;
 ```
+
+Cluster Performance Testing
+---
+Screenshot of Cluster performance once setup is complete (Using cassandra-stress with 6 nodes)
+![Screenshot](Screen Shot 2017-04-24 at 10.26.05 PM.png)
