@@ -161,5 +161,8 @@ drop table users;
 
 Cluster Performance Testing
 ---
-Screenshot of Cluster performance once setup is complete (Using cassandra-stress with 6 nodes)
-![Screenshot](Screen Shot 2017-04-24 at 10.26.05 PM.png)
+Screenshot of Cluster status once setup is complete
+![Screenshot](active_nodes.png)
+
+Results of cassandra-stress test with 1 million writes
+![Screenshot](1mil_writes.png)
